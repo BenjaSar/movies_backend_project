@@ -1,11 +1,10 @@
 const db = require("../db/db");
 
 const getAllMovies = (req, res) => {
-  const sql = "SELECT * FROM users";
+  const sql = "SELECT * FROM movies";
 
   db.query(sql, (err, results) => {
     if (err) throw err;
-
     res.json(results);
   });
 };
@@ -16,14 +15,12 @@ const getMoviesById = (req, res) => {
 
   db.query(sql, [id], (err, result) => {
     if (err) throw err;
-
     res.json(result);
   });
 };
 
 const createMovie = (req, res) => {
   const { nombre, apellido, mail } = req.body;
-
   const sql = "INSERT INTO movies (zzzz,zzzzz, zzz) VALUES (?,?,?)";
 
   db.query(sql, [nombre, apellido, mail], (err, result) => {

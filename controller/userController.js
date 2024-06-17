@@ -5,32 +5,30 @@ const getAllUsers = (req, res) => {
 
   db.query(sql, (err, results) => {
     if (err) throw err;
-
     res.json(results);
   });
 };
 
 const getUserById = (req, res) => {
   const { id } = req.params;
-  const sql = "SELECT * FROM usuarios WHERE id = ?";
+  const sql = "SELECT * FROM users WHERE id = ?";
 
   db.query(sql, [id], (err, result) => {
     if (err) throw err;
-
     res.json(result);
   });
 };
 
 const createUser = (req, res) => {
-  const { nombre, apellido, mail } = req.body;
+  const { name, surname, gender,  birthday, mail, national_document_identity } = req.body;
 
-  const sql = "INSERT INTO usuarios (nombre,apellido,mail) VALUES (?,?,?)";
+  const sql = "INSERT INTO users (name,surname,gender, birthday, mail, national_document_identity) VALUES (?,?,?,?,?,?)";
 
-  db.query(sql, [nombre, apellido, mail], (err, result) => {
+  db.query(sql, [name, surname, gender,  birthday, mail, national_document_identity], (err, result) => {
     if (err) throw err;
 
     res.json({
-      mensaje: "Usuario Creado con EXITO",
+      mensaje: "User generated in succesful way",
       idUsuario: result.insertId,
     });
   });
@@ -61,7 +59,7 @@ const deleteUser = (req, res) => {
     if (err) throw err;
 
     res.json({
-      mensaje: "usuario ELIMINADO con EXITO",
+      mensaje: "User deleted in succesful way.",
     });
   });
 };
