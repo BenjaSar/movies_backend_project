@@ -45,7 +45,7 @@ const updateUser = (req, res) => {
     if (err) throw err;
 
     res.json({
-      mensaje: "Usuario EDITADO",
+      mensaje: "The data user was updated.",
     });
   });
 };
