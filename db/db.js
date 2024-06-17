@@ -3,49 +3,52 @@ const connection = mySql.createConnection({
   host: "localhost",
   user: "root",
   password: "123456",
-  database: "user_db",
+  database: "rent_movies",
 });
 
 connection.connect((err) => {
   if (err) {
-    console.error("Error conectando a la base de datos", err);
+    console.error("An error occurred while trying to connect to the database. Possible reasons include incorrect database credentials, database server downtime, or network issues. Please verify your connection details and try again. If the issue persists, contact the database administrator", err);
     return;
   }
 
-  console.log("Conectado a la base de datos");
+  console.log("Connected to the db");
 
   connection.query(
-    "CREATE DATABASE IF NOT EXISTS usuarios_db",
+    "CREATE DATABASE IF NOT EXISTS rent_movies",
     (err, results) => {
       if (err) {
-        console.log("Error creando la base de datos");
+        console.log("An error occurred while creating the database");
         return;
       }
 
-      console.log("Base de datos asegurada");
+      console.log("The database created in succesful way");
 
-      connection.changeUser({ database: "usuarios_db" }, (err) => {
+      connection.changeUser({ database: "rent_movies" }, (err) => {
         if (err) {
-          console.error("Error al cambiar a usuarios_db", err);
+          console.error("An error occurred while changing the user data", err);
           return;
         }
 
         const createTableQuery = `
                 CREATE TABLE IF NOT EXISTS users (
                     id INT AUTO_INCREMENT PRIMARY KEY,
-                    nombre VARCHAR(100) NOT NULL,
-                    apellido VARCHAR(100) NOT NULL,
-                    mail VARCHAR(255) NOT NULL
+                    name VARCHAR(250) NOT NULL,
+                    surname VARCHAR(250) NOT NULL,
+                    gender VARCHAR (100), 
+                    birthday date NOT NULL, 
+                    mail VARCHAR(255) NOT NULL, 
+                    national_document_identity VARCHAR(20) NOT NULL
                 );            
             `;
 
         connection.query(createTableQuery, (err, results) => {
           if (err) {
-            console.log("Error creando la tabla: ", err);
+            console.log("An error occurred while creating the table", err);
             return;
           }
 
-          console.log("La tabla fue creada de manera exitosa");
+          console.log("The table was created in a succesful way");
         });
       });
     }

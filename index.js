@@ -1,15 +1,21 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
-let port = 5000;
 
-const usuariosRouter = require("./routes/users");
-const moviesRouter = require("./routes/movies");
+const  PORT =  process.env.PORT || 5000;
+
+app.get('/', (req, res)=>{
+  res.send('The API is running');
+})
+
+const usersRouter = require("./routes/users");
+//const moviesRouter = require("./routes/movies");
 
 app.use(express.json());
 
-app.use("/usuarios", usuariosRouter);
-app.use("/movies", moviesRouter);
+app.use("/users", usersRouter);
+//app.use("/movies", moviesRouter);
 
 app.listen(port, () => {
-  console.log(`Servidor ejecutandose en el puerto ${port}`);
+  console.log(`Server listening on  http://localhost: ${PORT}`);
 });
