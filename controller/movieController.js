@@ -1,12 +1,17 @@
 const db = require("../db/db");
 
 const getAllMovies = (req, res) => {
-  const sql = "SELECT * FROM movies";
+  try {
+    const sql = "SELECT * FROM movies";
 
-  db.query(sql, (err, results) => {
-    if (err) throw err;
-    res.json(results);
-  });
+    db.query(sql, (err, results) => {
+      if (err) throw err;
+      res.json(results);
+    });
+  } catch (error) {
+    console.log(error);
+    return  res.status(500).send();
+  }
 };
 
 const getMoviesById = (req, res) => {
@@ -52,13 +57,13 @@ const updateMovie = (req, res) => {
 const deleteMovie = (req, res) => {
   const { id } = req.params;
 
-  const sql = "DELETE FROM usuarios WHERE id = ?";
+  const sql = "DELETE FROM movies WHERE id = ?";
 
   db.query(sql, [id], (err, result) => {
     if (err) throw err;
 
     res.json({
-      mensaje: "usuario ELIMINADO con EXITO",
+      mensaje: "The movie was deleted succesfully.",
     });
   });
 };

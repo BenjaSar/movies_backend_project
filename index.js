@@ -9,13 +9,13 @@ app.get('/', (req, res)=>{
 })
 
 const usersRouter = require("./routes/users");
-//const moviesRouter = require("./routes/movies");
+const moviesRouter = require("./routes/movies");
 
 app.use(express.json());
 
 app.use("/users", usersRouter);
-//app.use("/movies", moviesRouter);
+app.use("/movies", moviesRouter);
 
-app.listen(port, () => {
+app.listen(PORT, () => {
   console.log(`Server listening on  http://localhost: ${PORT}`);
 });

@@ -1,9 +1,10 @@
 const mySql = require("mysql2");
 const connection = mySql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "123456",
-  database: "rent_movies",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME, 
+  connectTimeout:60000
 });
 
 connection.connect((err) => {
@@ -12,7 +13,7 @@ connection.connect((err) => {
     return;
   }
 
-  console.log("Connected to the db");
+  console.log("Connected succesfully to the db");
 
   connection.query(
     "CREATE DATABASE IF NOT EXISTS rent_movies",
@@ -26,7 +27,7 @@ connection.connect((err) => {
 
       connection.changeUser({ database: "rent_movies" }, (err) => {
         if (err) {
-          console.error("An error occurred while changing the user data", err);
+          console.error("An error occurred while changing to the rent_movies database.", err);
           return;
         }
 
@@ -39,7 +40,22 @@ connection.connect((err) => {
                     birthday date NOT NULL, 
                     mail VARCHAR(255) NOT NULL, 
                     national_document_identity VARCHAR(20) NOT NULL
-                );            
+                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;  
+
+                CREATE TABLE IF NOT EXISTS movies(
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    name VARCHAR(100) NOT NULL,
+                    release_dt DATE, 
+                    synopsis TEXT
+                )ENGINE=InnoDB  DEFAULT CHARSET=utf8; 
+
+                CREATE TABLE IF NOT EXISTS movie_rent (
+                    movie_id INT NOT NULL, 
+                    user_id INT NOT NULL, 
+                    PRIMARY KEY(user_id, movie_id), 
+                    FOREIGN KEY (user_id) REFERENCES users(id),
+                    FOREIGN KEY (movie_id) REFERENCES movies(id)      
+                )ENGINE=InnoDB  DEFAULT CHARSET=utf8;
             `;
 
         connection.query(createTableQuery, (err, results) => {
@@ -47,9 +63,18 @@ connection.connect((err) => {
             console.log("An error occurred while creating the table", err);
             return;
           }
-
-          console.log("The table was created in a succesful way");
+          console.log("Tables created succesfully.");
         });
+
+        connection.end(error=>{
+          if(error){
+            return console.error("An error occurred while trying to close the connection:", error.message);
+          }
+          console.log("Connection closed.")
+        }
+
+
+        );
       });
     }
   );

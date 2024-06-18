@@ -28,7 +28,7 @@ const createUser = (req, res) => {
     if (err) throw err;
 
     res.json({
-      mensaje: "User generated in succesful way",
+      mensaje: "User generated succesfully.",
       idUsuario: result.insertId,
     });
   });
@@ -36,12 +36,12 @@ const createUser = (req, res) => {
 
 const updateUser = (req, res) => {
   const { id } = req.params;
-  const { nombre, apellido, mail } = req.body;
+  const { name, surname, gender,  birthday, mail, national_document_identity} = req.body;
 
   const sql =
-    "UPDATE usuarios SET nombre = ?, apellido = ? , mail = ? WHERE id = ?";
+    "UPDATE usuarios SET name = ?, surname = ? , gender = ?, birthdat = ?,  mail = ?, national_document_identity WHERE id = ?";
 
-  db.query(sql, [nombre, apellido, mail, id], (err, result) => {
+  db.query(sql, [name, surname, gender,  birthday, mail, national_document_identity, id], (err, result) => {
     if (err) throw err;
 
     res.json({
@@ -53,13 +53,13 @@ const updateUser = (req, res) => {
 const deleteUser = (req, res) => {
   const { id } = req.params;
 
-  const sql = "DELETE FROM usuarios WHERE id = ?";
+  const sql = "DELETE FROM users WHERE id = ?";
 
   db.query(sql, [id], (err, result) => {
     if (err) throw err;
 
     res.json({
-      mensaje: "User deleted in succesful way.",
+      mensaje: "The data user was deleted succesfully.",
     });
   });
 };
