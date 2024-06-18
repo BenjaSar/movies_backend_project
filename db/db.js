@@ -3,13 +3,17 @@ const connection = mySql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME, 
-  connectTimeout:60000
+  database: process.env.DB_NAME,
+  connectTimeout: process.env.DB_TIMEOUT,
+  multipleStatements: true // Enable multiple statements
 });
 
 connection.connect((err) => {
   if (err) {
-    console.error("An error occurred while trying to connect to the database. Possible reasons include incorrect database credentials, database server downtime, or network issues. Please verify your connection details and try again. If the issue persists, contact the database administrator", err);
+    console.error(
+      "An error occurred while trying to connect to the database. Possible reasons include incorrect database credentials, database server downtime, or network issues. Please verify your connection details and try again. If the issue persists, contact the database administrator",
+      err
+    );
     return;
   }
 
@@ -22,12 +26,14 @@ connection.connect((err) => {
         console.log("An error occurred while creating the database");
         return;
       }
-
-      console.log("The database created in succesful way");
+      console.log("The database was created succesfully.");
 
       connection.changeUser({ database: "rent_movies" }, (err) => {
         if (err) {
-          console.error("An error occurred while changing to the rent_movies database.", err);
+          console.error(
+            "An error occurred while changing to the rent_movies database.",
+            err
+          );
           return;
         }
 
@@ -47,8 +53,15 @@ connection.connect((err) => {
                     name VARCHAR(100) NOT NULL,
                     release_dt DATE, 
                     synopsis TEXT
-                )ENGINE=InnoDB  DEFAULT CHARSET=utf8; 
-
+                )ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+                
+                   CREATE TABLE IF NOT EXISTS movies(
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    name VARCHAR(100) NOT NULL,
+                    release_dt DATE, 
+                    synopsis TEXT
+                )ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+                
                 CREATE TABLE IF NOT EXISTS movie_rent (
                     movie_id INT NOT NULL, 
                     user_id INT NOT NULL, 
@@ -56,25 +69,26 @@ connection.connect((err) => {
                     FOREIGN KEY (user_id) REFERENCES users(id),
                     FOREIGN KEY (movie_id) REFERENCES movies(id)      
                 )ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-            `;
+
+                `;
 
         connection.query(createTableQuery, (err, results) => {
           if (err) {
             console.log("An error occurred while creating the table", err);
             return;
           }
-          console.log("Tables created succesfully.");
+          console.log("Tables were created succesfully.", results);
+
+          connection.end((error) => {
+            if (error) {
+              return console.error(
+                "An error occurred while trying to close the connection:",
+                error.message
+              );
+            }
+            console.log("Connection closed.");
+          });
         });
-
-        connection.end(error=>{
-          if(error){
-            return console.error("An error occurred while trying to close the connection:", error.message);
-          }
-          console.log("Connection closed.")
-        }
-
-
-        );
       });
     }
   );

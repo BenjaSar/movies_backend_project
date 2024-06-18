@@ -8,6 +8,8 @@ app.get('/', (req, res)=>{
   res.send('The API is running');
 })
 
+//app.use(express.static(path.join(__dirname, 'public')))
+
 const usersRouter = require("./routes/users");
 const moviesRouter = require("./routes/movies");
 
