@@ -78,6 +78,20 @@ connection.connect((err) => {
             return;
           }
           console.log("Tables were created succesfully.", results);
+          
+          const createGenreTableQuery =
+          `CREATE TABLE IF NOT EXIST genre 
+          (id_genero INT AUTO_INCREMENT, PRIMARY KEY,
+          descripcion VARCHAR (100) NOT NULL);`
+          ;
+           
+          connection.query(createGenreTableQuery, (err, results) =>{
+              if (err) {
+                  console.log ("Error creando la tabla genre: ", err);
+                  return;
+              }
+              console.log ("La tabla genre fue creada de manera exitosa");
+          });
 
           connection.end((error) => {
             if (error) {
