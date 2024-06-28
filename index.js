@@ -4,6 +4,8 @@ const app = express();
 
 const  PORT =  process.env.PORT || 5000;
 
+app.use(express.json());
+
 app.get('/', (req, res)=>{
   res.send('The API is running');
 })
@@ -12,8 +14,6 @@ app.get('/', (req, res)=>{
 
 const usersRouter = require("./routes/users");
 const moviesRouter = require("./routes/movies");
-
-app.use(express.json());
 
 app.use("/users", usersRouter);
 app.use("/movies", moviesRouter);

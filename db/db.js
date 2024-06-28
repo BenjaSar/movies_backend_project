@@ -5,7 +5,7 @@ const connection = mySql.createConnection({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   connectTimeout: process.env.DB_TIMEOUT,
-  multipleStatements: true // Enable multiple statements
+  multipleStatements: true, // Enable multiple statements
 });
 
 connection.connect((err) => {
@@ -54,14 +54,7 @@ connection.connect((err) => {
                     release_dt DATE, 
                     synopsis TEXT
                 )ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-                
-                   CREATE TABLE IF NOT EXISTS movies(
-                    id INT AUTO_INCREMENT PRIMARY KEY,
-                    name VARCHAR(100) NOT NULL,
-                    release_dt DATE, 
-                    synopsis TEXT
-                )ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-                
+
                 CREATE TABLE IF NOT EXISTS movie_rent (
                     movie_id INT NOT NULL, 
                     user_id INT NOT NULL, 
@@ -70,38 +63,17 @@ connection.connect((err) => {
                     FOREIGN KEY (movie_id) REFERENCES movies(id)      
                 )ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+                CREATE TABLE IF NOT EXISTS genre (
+                  id_genre INT AUTO_INCREMENT PRIMARY KEY,
+                  description VARCHAR (100) NOT NULL
+                  );
                 `;
-
         connection.query(createTableQuery, (err, results) => {
           if (err) {
             console.log("An error occurred while creating the table", err);
             return;
           }
           console.log("Tables were created succesfully.", results);
-
-          const createGenreTableQuery =
-          `CREATE TABLE IF NOT EXIST genre 
-          (id_genero INT AUTO_INCREMENT, PRIMARY KEY,
-          descripcion VARCHAR (100) NOT NULL);`
-          ;
-           
-          connection.query(createGenreTableQuery, (err, results) =>{
-              if (err) {
-                  console.log ("An error occurred while creating the table", err);
-                  return;
-              }
-              console.log ("Tables were created succesfully.");
-          });
-
-          connection.end((error) => {
-            if (error) {
-              return console.error(
-                "An error occurred while trying to close the connection:",
-                error.message
-              );
-            }
-            console.log("Connection closed.");
-          });
         });
       });
     }
