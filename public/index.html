@@ -1,11 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FRONT OF MOVIES AND USERS</title>
+    <title>MANAGEMENT</title>
+    <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
-    
+    <h1 class="header"> USER MANAGEMENT</h1>
+    <button id="createUserButton"> + Create user</button>
+    <form id="createUserForm" class="hidden" enctype="multipart/form-data">
+        <label for="name"> Name</label>
+        <input type="text" id="name" name="name" required>
+        <label for="Surname"> Surname</label>
+        <input type="text" id="surname" name="surname" required>
+        <label for="gender"> Gender</label>
+        <select class="select-gender" name="gender" id="gender">
+            <option value="femele">Femele</option>
+            <option value="mele">Mele</option>
+        </select>    
+        <label for="birthday"> Birthday</label>
+        <input class="picker-birthday" type="date" id="birthday" name="birthday" required value="2000-01-01">
+        <label for="dni">DNI</label>
+        <input type="text" id="dni" name="dni" required>
+
+
+
+    </form>
+
+    <script src="script.js"></script>
+
 </body>
+
 </html>
