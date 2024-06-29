@@ -40,7 +40,7 @@ const createMovie = (req, res) => {
 
 const updateMovie = (req, res) => {
   const { id } = req.params;
-  const { name, release_dt, synopsis } = req.body;
+  const { name, synopsis } = req.body;
 
   const sql =
     "UPDATE movies SET name = ? , synopsis = ? WHERE id = ?";

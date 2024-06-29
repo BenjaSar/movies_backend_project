@@ -75,6 +75,15 @@ connection.connect((err) => {
           }
           console.log("Tables were created succesfully.", results);
         });
+
+        // Close the connection
+        /*connection.end((err) => {
+          if (err) {
+            console.error("Error closing the connection:", err.stack);
+            return;
+          }
+          console.log("Connection closed.");
+        });*/
       });
     }
   );
