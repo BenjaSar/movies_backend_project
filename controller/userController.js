@@ -20,34 +20,44 @@ const getUserById = (req, res) => {
 };
 
 const createUser = (req, res) => {
-  const { name, surname, gender,  birthday, mail, national_document_identity } = req.body;
+  const { name, surname, gender, birthday, mail, national_document_identity } =
+    req.body;
 
-  const sql = "INSERT INTO users (name,surname,gender, birthday, mail, national_document_identity) VALUES (?,?,?,?,?,?)";
+  const sql =
+    "INSERT INTO users (name,surname,gender, birthday, mail, national_document_identity) VALUES (?,?,?,?,?,?)";
 
-  db.query(sql, [name, surname, gender,  birthday, mail, national_document_identity], (err, result) => {
-    if (err) throw err;
+  db.query(
+    sql,
+    [name, surname, gender, birthday, mail, national_document_identity],
+    (err, result) => {
+      if (err) throw err;
 
-    res.json({
-      mensaje: "User generated succesfully.",
-      idUsuario: result.insertId,
-    });
-  });
+      res.json({
+        mensaje: "User generated succesfully.",
+        idUsuario: result.insertId,
+      });
+    }
+  );
 };
 
 const updateUser = (req, res) => {
   const { id } = req.params;
-  const { name, surname, gender,  birthday, mail, national_document_identity} = req.body;
+  const { name, surname, gender, mail } =
+    req.body;
 
   const sql =
-    "UPDATE usuarios SET name = ?, surname = ? , gender = ?, birthdat = ?,  mail = ?, national_document_identity WHERE id = ?";
+    "UPDATE users SET name = ?, surname = ? , gender = ?,  mail= ? WHERE id = ?";
 
-  db.query(sql, [name, surname, gender,  birthday, mail, national_document_identity, id], (err, result) => {
-    if (err) throw err;
-
-    res.json({
-      mensaje: "The data user was updated.",
-    });
-  });
+  db.query(
+    sql,
+    [name, surname, gender, mail, id],
+    (err, result) => {
+      if (err) throw err;
+      res.json({
+        message: "Records updated successfully.",
+      });
+    }
+  );
 };
 
 const deleteUser = (req, res) => {

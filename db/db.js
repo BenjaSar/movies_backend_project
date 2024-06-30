@@ -1,11 +1,13 @@
 const mySql = require("mysql2");
 const connection = mySql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    connectTimeout: process.env.DB_TIMEOUT,
-    multipleStatements: true // Enable multiple statements
+
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  connectTimeout: process.env.DB_TIMEOUT,
+  multipleStatements: true, // Enable multiple statements
+
 });
 
 connection.connect((err) => {
@@ -54,14 +56,7 @@ connection.connect((err) => {
                     release_dt DATE, 
                     synopsis TEXT
                 )ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-                
-                   CREATE TABLE IF NOT EXISTS movies(
-                    id INT AUTO_INCREMENT PRIMARY KEY,
-                    name VARCHAR(100) NOT NULL,
-                    release_dt DATE, 
-                    synopsis TEXT
-                )ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-                
+
                 CREATE TABLE IF NOT EXISTS movie_rent (
                     movie_id INT NOT NULL, 
                     user_id INT NOT NULL, 
@@ -71,6 +66,7 @@ connection.connect((err) => {
                 )ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
                 CREATE TABLE IF NOT EXISTS genre (
+
                     id_genero INT AUTO_INCREMENT PRIMARY KEY,
                     descripcion VARCHAR(100) NOT NULL
                 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -111,6 +107,7 @@ connection.connect((err) => {
             });
         }
     );
+
 });
 
 module.exports = connection;
