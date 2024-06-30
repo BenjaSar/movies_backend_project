@@ -14,9 +14,11 @@ app.get('/', (req, res)=>{
 
 const usersRouter = require("./routes/users");
 const moviesRouter = require("./routes/movies");
+const genreRoutes = require('./routes/genres');
 
 app.use("/users", usersRouter);
 app.use("/movies", moviesRouter);
+app.use('/genres', genreRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server listening on  http://localhost: ${PORT}`);
