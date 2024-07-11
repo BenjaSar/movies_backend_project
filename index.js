@@ -1,6 +1,8 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require('cors');
 const app = express();
+app.use(cors());
 
 const  PORT =  process.env.PORT || 5000;
 
@@ -21,5 +23,5 @@ app.use("/movies", moviesRouter);
 app.use('/genres', genreRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Server listening on  http://localhost: ${PORT}`);
+  console.log(`Server listening on  http://localhost:${PORT}`);
 });

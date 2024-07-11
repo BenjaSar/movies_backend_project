@@ -19,7 +19,7 @@
     </header>
     <main id="main" class="main">
         <section data-aos="zoom-in" data-aos-duration="1000" class="seccionRegistrarse">
-            <form action="" method="get">
+            <form class="hidden" action="" method="POST" id = "createUserForm" enctype="multipart/form-data">
                 <h2 class="tituloRegistrarse">Registro</h2>
                 <div>
                     <input type="text" placeholder="Nombre"  id="nombre" name="nombre">
@@ -42,10 +42,11 @@
                     <div class="error-text"></div>
                 </div>
                 <div>
-                    <select name="pais" id="pais">
-                        <option value="">País</option>
-                        <option value="AR">Argentina</option>
-                        <option value="BO">Bolivia</option>
+                    <select name="genero" id="pais">
+                        <option value="">Genero</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <!--
                         <option value="BR">Brasil</option>
                         <option value="CH">Chile</option>
                         <option value="CO">Colombia</option>
@@ -53,8 +54,12 @@
                         <option value="PY">Paraguay</option>
                         <option value="PE">Perú</option>
                         <option value="UY">Uruguay</option>
-                        <option value="VE">Venezuela</option>
+                        <option value="VE">Venezuela</option>-->
                     </select>
+                    <div class="error-text"></div>
+                </div>
+                <div>
+                    <input type="text" placeholder="Documento Nacional de Identidad"  id="documentoNacionalIdentidad" name="documentoNacionalIdentidad">
                     <div class="error-text"></div>
                 </div>
                 <div class="terminos">
@@ -66,7 +71,7 @@
                     <input class="boton" type="submit" value="Registrarse">
                 </div>
                 <div>
-                    <a class="ayuda" href="/FRONTEND/PUBLIC/miperfil.html">Editar Perfil</a>
+                    <a class="ayuda" href="./miperfil.html">Editar Perfil</a>
                 </div>
 
                 <div>
@@ -79,6 +84,7 @@
     <script>
         AOS.init();
     </script>
+    <script src="../js/index.js"></script>
    <script src="../js/valida_registrarse.js"></script>
 </body>
 </html>

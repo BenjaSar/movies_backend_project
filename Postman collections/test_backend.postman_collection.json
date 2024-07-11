@@ -1,0 +1,265 @@
+{
+	"info": {
+		"_postman_id": "7f1528e4-2019-4d57-8205-e5ad7e92e5f8",
+		"name": "test_backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26077226",
+		"_collection_link": "https://iofdev.postman.co/workspace/IoF-Workspace~5d2f7d3a-b861-4025-8ec3-babf11801d62/collection/26077226-7f1528e4-2019-4d57-8205-e5ad7e92e5f8?action=share&source=collection_link&creator=26077226"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Get all users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Marcos\",\r\n    \"surname\":\"Sosa\",\r\n    \"gender\": \"Masculino\",\r\n    \"birthday\": \"1950-12-24\",\r\n    \"mail\":\"marcos.sosa@gmail.com\",\r\n    \"national_document_identity\": \"22414220\"\r\n\r\n}\r\n\r\n/*{\r\n    \"name\": \"Sabrina\",\r\n    \"surname\":\"Lucero\",\r\n    \"gender\": \"Femenino\",\r\n    \"birthday\": \"1990-12-31\",\r\n    \"mail\":\"sabri.u11@gmail.com\"\r\n    //\"national_document_identity\": \"32414220\"\r\n\r\n}*/",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit users",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Milena\",\r\n    \"surname\":\"Viltes\",\r\n    \"mail\":\"mviltes.lopez@gmail.com\"\r\n\r\n}\r\n\r\n/*{\r\n    \"name\": \"Sabrina\",\r\n    \"surname\":\"Lucero\",\r\n    \"gender\": \"Femenino\",\r\n    \"birthday\": \"1990-12-31\",\r\n    \"mail\":\"sabri.u11@gmail.com\"\r\n    //\"national_document_identity\": \"32414220\"\r\n\r\n}*/",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "/*{\r\n    \"name\": \"Sabrina\",\r\n    \"surname\":\"Lucero\",\r\n    \"gender\": \"Femenino\",\r\n    \"birthday\": \"1990-12-24\",\r\n    \"mail\":\"sabri.u11@gmail.com\",\r\n    \"national_document_identity\": \"32414220\"\r\n\r\n}*/\r\n\r\n{\r\n    \"name\": \"Sabrina\",\r\n    \"surname\":\"Lucero\",\r\n    \"gender\": \"Femenino\",\r\n    //\"birthday\": \"1990-12-31\",\r\n    \"mail\":\"sabri.u11@gmail.com\"\r\n    //\"national_document_identity\": \"32414220\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Sabrina\",\r\n    \"surname\":\"Lucero\",\r\n    \"gender\": \"Femenino\",\r\n    \"birthday\": \"1990-12-24\",\r\n    \"mail\":\"sabri.u11@gmail.com\",\r\n    \"national_document_identity\": \"32414220\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "movies",
+			"item": [
+				{
+					"name": "Create movie",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Fast & Furious\",\r\n    \"relseare_dt\":\"2001-17-11\",\r\n    \"synopsis\": \"Cada noche, Los Ángeles es testigo de alguna carrera de coches. Últimamente ha aparecido un nuevo corredor, todos saben que es duro y que es rápido, pero lo que no saben es que es un detective con la determinación de salir victorioso.\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}movies/",
+							"host": [
+								"{{localhost}}movies"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit movie",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"id\": 3,\r\n        \"name\": \"Fast & Furious\",\r\n        \"release_dt\": \"2024-12-01\",\r\n        \"synopsis\": \"Cada noche, Los Ángeles es testigo de alguna carrera de coches. Últimamente ha aparecido un nuevo corredor, todos saben que es duro y que es rápido, pero lo que no saben es que es un detective con la determinación de salir victorioso.\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}movies/3",
+							"host": [
+								"{{localhost}}movies"
+							],
+							"path": [
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all movies",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Harry Potter and the Chamber of Secrets\",\r\n    \"release_dt\": \"2002-02-28\",\r\n    \"synopsis\": \"Harry Potter lives his second year at Hogwarts with Ron and Hermione when a message on the wall announces that the legendary Chamber of Secrets has been opened. The trio soon realize that, to save the school, it will take a lot of courage\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}movies/1",
+							"host": [
+								"{{localhost}}movies"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete movies",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Harry Potter and the Chamber of Secrets\",\r\n    \"release_dt\": \"2002-02-28\",\r\n    \"synopsis\": \"Harry Potter lives his second year at Hogwarts with Ron and Hermione when a message on the wall announces that the legendary Chamber of Secrets has been opened. The trio soon realize that, to save the school, it will take a lot of courage\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}movies/3",
+							"host": [
+								"{{localhost}}movies"
+							],
+							"path": [
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Register user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"MilenaViltes\", \r\n    \"password\": \"prueba123\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/register",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "localhost",
+			"value": "http://localhost:5000/"
+		}
+	]
+}

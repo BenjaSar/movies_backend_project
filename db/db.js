@@ -66,11 +66,9 @@ connection.connect((err) => {
                 )ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
                 CREATE TABLE IF NOT EXISTS genre (
-
                     id_genero INT AUTO_INCREMENT PRIMARY KEY,
                     descripcion VARCHAR(100) NOT NULL
                 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
                 `;
 
                 connection.query(createTableQuery, (err, results) => {
@@ -79,22 +77,7 @@ connection.connect((err) => {
                         return;
                     }
                     console.log("Tables were created succesfully.", results);
-
-                    const createGenreTableQuery =
-                        `CREATE TABLE IF NOT EXISTS genre 
-                        (id_genero INT AUTO_INCREMENT, PRIMARY KEY,
-                        descripcion VARCHAR (100) NOT NULL);`
-                        ;
-
-                    connection.query(createGenreTableQuery, (err, results) => {
-                        if (err) {
-                            console.log("An error occurred while creating the table", err);
-                            return;
-                        }
-                        console.log("Tables were created succesfully.");
-                    });
-
-                    connection.end((error) => {
+                    /*connection.end((error) => {
                         if (error) {
                             return console.error(
                                 "An error occurred while trying to close the connection:",
@@ -102,7 +85,7 @@ connection.connect((err) => {
                             );
                         }
                         console.log("Connection closed.");
-                    });
+                    });*/
                 });
             });
         }

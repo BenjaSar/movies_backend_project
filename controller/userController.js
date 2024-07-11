@@ -42,15 +42,15 @@ const createUser = (req, res) => {
 
 const updateUser = (req, res) => {
   const { id } = req.params;
-  const { name, surname, gender, mail } =
+  const { name, surname, mail } =
     req.body;
 
   const sql =
-    "UPDATE users SET name = ?, surname = ? , gender = ?,  mail= ? WHERE id = ?";
+    "UPDATE users SET name = ?, surname = ? , mail = ?  WHERE id = ?";
 
   db.query(
     sql,
-    [name, surname, gender, mail, id],
+    [name, surname, mail, id],
     (err, result) => {
       if (err) throw err;
       res.json({
