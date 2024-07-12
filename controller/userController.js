@@ -20,46 +20,56 @@ const getUserById = (req, res) => {
 };
 
 const createUser = (req, res) => {
-  const { name, surname, gender,  birthday, mail, national_document_identity } = req.body;
+  const { name, surname, gender, birthday, mail, national_document_identity } =
+    req.body;
 
-  const sql = "INSERT INTO users (name,surname,gender, birthday, mail, national_document_identity) VALUES (?,?,?,?,?,?)";
+  const sql =
+    "INSERT INTO users (name,surname,gender, birthday, mail, national_document_identity) VALUES (?,?,?,?,?,?)";
 
-  db.query(sql, [name, surname, gender,  birthday, mail, national_document_identity], (err, result) => {
-    if (err) throw err;
+  db.query(
+    sql,
+    [name, surname, gender, birthday, mail, national_document_identity],
+    (err, result) => {
+      if (err) throw err;
 
-    res.json({
-      mensaje: "User generated in succesful way",
-      idUsuario: result.insertId,
-    });
-  });
+      res.json({
+        mensaje: "User generated succesfully.",
+        idUsuario: result.insertId,
+      });
+    }
+  );
 };
 
 const updateUser = (req, res) => {
   const { id } = req.params;
-  const { nombre, apellido, mail } = req.body;
+  const { name, surname, mail } =
+    req.body;
 
   const sql =
-    "UPDATE usuarios SET nombre = ?, apellido = ? , mail = ? WHERE id = ?";
+    "UPDATE users SET name = ?, surname = ? , mail = ?  WHERE id = ?";
 
-  db.query(sql, [nombre, apellido, mail, id], (err, result) => {
-    if (err) throw err;
-
-    res.json({
-      mensaje: "Usuario EDITADO",
-    });
-  });
+  db.query(
+    sql,
+    [name, surname, mail, id],
+    (err, result) => {
+      if (err) throw err;
+      res.json({
+        message: "Records updated successfully.",
+      });
+    }
+  );
 };
 
 const deleteUser = (req, res) => {
   const { id } = req.params;
 
-  const sql = "DELETE FROM usuarios WHERE id = ?";
+  const sql = "DELETE FROM users WHERE id = ?";
 
   db.query(sql, [id], (err, result) => {
     if (err) throw err;
 
     res.json({
-      mensaje: "User deleted in succesful way.",
+      mensaje: "The data user was deleted succesfully.",
     });
   });
 };
